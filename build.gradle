@@ -2,7 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.5.3'
 	id 'io.spring.dependency-management' version '1.1.7'
-	id 'com.netflix.dgs.codegen' version '6.2.1'
+	id 'com.netflix.dgs.codegen' version '6.0.1'
 }
 
 group = 'com.example'
@@ -26,8 +26,7 @@ repositories {
 
 dependencies {
 	// DGS
-	implementation platform('com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:9.0.4')
-	implementation 'com.netflix.graphql.dgs:graphql-dgs-spring-graphql-starter'
+	implementation 'com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter:9.1.0'
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -45,12 +44,23 @@ generateJava {
 	generateClient = true
 }
 
+//// Добавь это:
+//sourceSets {
+//	main {
+//		java {
+//			srcDir "${buildDir}/generated/sources/dgs-codegen"
+//		}
+//	}
+//}
+
+compileJava.dependsOn generateJava
+
 tasks.named('test') {
 	useJUnitPlatform()
 }
 
-//configurations.all {
-//	resolutionStrategy {
-//		force 'com.graphql-java:java-dataloader:3.3.0'
-//	}
-//}
+configurations.all {
+	resolutionStrategy {
+		force 'com.graphql-java:java-dataloader:3.3.0'
+	}
+}
