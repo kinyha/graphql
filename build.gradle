@@ -49,9 +49,8 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-configurations.all {
-	resolutionStrategy {
-		force 'com.graphql-java:java-dataloader:3.3.0'
-	}
-}
-
+//configurations.all {
+//	resolutionStrategy {
+//		force 'com.graphql-java:java-dataloader:3.3.0'
+//	}
+//}
