@@ -20,7 +20,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Todo {
+public class TodoBack {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;

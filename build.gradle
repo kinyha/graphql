@@ -44,14 +44,6 @@ generateJava {
 	generateClient = true
 }
 
-//// Добавь это:
-//sourceSets {
-//	main {
-//		java {
-//			srcDir "${buildDir}/generated/sources/dgs-codegen"
-//		}
-//	}
-//}
 
 compileJava.dependsOn generateJava
 

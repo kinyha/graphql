@@ -1,9 +1,10 @@
 package com.example.graphql_todo.datafetchers;
 
 
-import com.example.graphql_todo.domain.Todo;
+import com.example.graphql_todo.domain.TodoBack;
 import com.example.graphql_todo.domain.TodoRepository;
 import com.example.graphql_todo.generated.types.CreateTodoInput;
+import com.example.graphql_todo.generated.types.Todo;
 import com.netflix.graphql.dgs.DgsComponent;
 import com.netflix.graphql.dgs.DgsMutation;
 import com.netflix.graphql.dgs.DgsQuery;
@@ -19,16 +20,16 @@ public class TodoDataFetcher {
     private final TodoRepository todoRepository;
 
     @DgsQuery
-    public List<com.example.graphql_todo.generated.types.Todo> todos() {
+    public List<Todo> todos() {
         return todoRepository.findAll().stream()
                 .map(this::toGraphQL)
                 .toList();
     }
 
     @DgsMutation
-    public com.example.graphql_todo.generated.types.Todo createTodo(@InputArgument CreateTodoInput input) {
+    public Todo createTodo(@InputArgument CreateTodoInput input) {
         var entity = todoRepository.save(
-                Todo.builder()
+                TodoBack.builder()
                         .title(input.getTitle())
                         .completed(false)
                         .build()
@@ -36,8 +37,8 @@ public class TodoDataFetcher {
         return toGraphQL(entity);
     }
 
-    private com.example.graphql_todo.generated.types.Todo toGraphQL(Todo entity) {
-        return com.example.graphql_todo.generated.types.Todo.newBuilder()
+    private Todo toGraphQL(TodoBack entity) {
+        return Todo.newBuilder()
                 .id(entity.getId())
                 .title(entity.getTitle())
                 .completed(entity.isCompleted())
