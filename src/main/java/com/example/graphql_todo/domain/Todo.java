@@ -1,16 +1,11 @@
 package com.example.graphql_todo.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-//import org.hibernate.annotations.Table;
 
 import java.time.Instant;
 
@@ -20,7 +15,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TodoBack {
+public class Todo {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;

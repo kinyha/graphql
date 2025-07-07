@@ -1,10 +1,13 @@
 type Query {
-    todos: [Todo!]!
+    todos(filter: TodoFilter, page: PageInput): TodoConnection!
     todo(id: ID!): Todo
 }
 
 type Mutation {
     createTodo(input: CreateTodoInput!): Todo!
+    updateTodo(id: ID!, input: UpdateTodoInput!): Todo!
+    deleteTodo(id: ID!): Boolean!
+    toggleTodo(id: ID!): Todo!
 }
 
 type Todo {
@@ -14,6 +17,39 @@ type Todo {
     createdAt: String!
 }
 
+type TodoConnection {
+    edges: [TodoEdge!]!
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type TodoEdge {
+    node: Todo!
+    cursor: String!
+}
+
+type PageInfo {
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+    endCursor: String
+}
+
+input TodoFilter {
+    completed: Boolean
+    search: String
+}
+
+input PageInput {
+    first: Int
+    after: String
+}
+
 input CreateTodoInput {
     title: String!
+}
+
+input UpdateTodoInput {
+    title: String
+    completed: Boolean
 }
