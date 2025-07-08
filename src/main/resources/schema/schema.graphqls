@@ -1,5 +1,5 @@
 type Query {
-    todos(filter: TodoFilter, page: PageInput): TodoConnection!
+    todos(filter: TodoFilter): [Todo!]!
     todo(id: ID!): Todo
 }
 
@@ -17,32 +17,9 @@ type Todo {
     createdAt: String!
 }
 
-type TodoConnection {
-    edges: [TodoEdge!]!
-    pageInfo: PageInfo!
-    totalCount: Int!
-}
-
-type TodoEdge {
-    node: Todo!
-    cursor: String!
-}
-
-type PageInfo {
-    hasNextPage: Boolean!
-    hasPreviousPage: Boolean!
-    startCursor: String
-    endCursor: String
-}
-
 input TodoFilter {
     completed: Boolean
     search: String
-}
-
-input PageInput {
-    first: Int
-    after: String
 }
 
 input CreateTodoInput {

@@ -20,7 +20,7 @@ public class TodoSot {
         return repository.findAll();
     }
 
-    public Optional<Todo> findById(String id) {
+    public Optional<Todo> findById(Long id) {
         log.debug("Fetching todo by id: {}", id);
         return repository.findById(id);
     }
@@ -30,7 +30,7 @@ public class TodoSot {
         return repository.save(todo);
     }
 
-    public void deleteById(String id) {
+    public void deleteById(Long id) {
         log.debug("Deleting todo by id: {}", id);
         repository.deleteById(id);
     }

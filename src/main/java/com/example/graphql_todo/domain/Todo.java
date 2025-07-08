@@ -17,10 +17,11 @@ import java.time.Instant;
 @Builder
 public class Todo {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String title;
+
     private boolean completed;
 
     @CreationTimestamp

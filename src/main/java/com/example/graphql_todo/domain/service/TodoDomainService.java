@@ -21,7 +21,7 @@ public class TodoDomainService {
     }
 
     @Transactional(readOnly = true)
-    public Todo getTodoById(String id) {
+    public Todo getTodoById(Long id) {
         return todoSot.findById(id)
                 .orElseThrow(() -> new RuntimeException("Todo not found: " + id));
     }
@@ -42,14 +42,14 @@ public class TodoDomainService {
     }
 
     @Transactional
-    public Todo toggleTodoStatus(String id) {
+    public Todo toggleTodoStatus(Long id) {
         Todo todo = getTodoById(id);
         todo.setCompleted(!todo.isCompleted());
         return todoSot.save(todo);
     }
 
     @Transactional
-    public Todo updateTodo(String id, String title, Boolean completed) {
+    public Todo updateTodo(Long id, String title, Boolean completed) {
         Todo todo = getTodoById(id);
 
         if (title != null && !title.isBlank()) {
@@ -64,7 +64,7 @@ public class TodoDomainService {
     }
 
     @Transactional
-    public boolean deleteTodo(String id) {
+    public boolean deleteTodo(Long id) {
         todoSot.deleteById(id);
         return true;
     }
